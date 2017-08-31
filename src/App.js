@@ -1,13 +1,11 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css'
 
-import BookShelf from './BookShelf'
+import BookShelves from './BookShelves'
 import BookSearch from './BookSearch'
 import update from 'immutability-helper'
-
-window.BooksAPI = BooksAPI
 
 class BooksApp extends React.Component {
   state = {
@@ -52,36 +50,10 @@ class BooksApp extends React.Component {
             exact
             path="/"
             render={() => (
-              <div className="list-books">
-                <div className="list-books-title">
-                  <h1>MyReads</h1>
-                </div>
-                <div className="list-books-content">
-                  <BookShelf
-                    books={this.state.books}
-                    section="Currently Reading"
-                    filter="currentlyReading"
-                    onShelfChange={this.onShelfChange}
-                  />
-
-                  <BookShelf
-                    books={this.state.books}
-                    section="Want To Read"
-                    filter="wantToRead"
-                    onShelfChange={this.onShelfChange}
-                  />
-
-                  <BookShelf
-                    books={this.state.books}
-                    section="Read"
-                    filter="read"
-                    onShelfChange={this.onShelfChange}
-                  />
-                </div>
-                <div className="open-search">
-                  <Link to="/search">Add a book</Link>
-                </div>
-              </div>
+              <BookShelves
+                books={this.state.books}
+                onShelfChange={this.onShelfChange}
+              />
             )}
           />
           <Route
