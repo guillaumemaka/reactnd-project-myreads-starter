@@ -6,6 +6,7 @@ import './App.css'
 import BookShelves from './BookShelves'
 import BookSearch from './BookSearch'
 import update from 'immutability-helper'
+import _ from 'lodash'
 
 class BooksApp extends React.Component {
   state = {
@@ -13,7 +14,8 @@ class BooksApp extends React.Component {
   }
 
   onShelfChange = async (book, shelf) => {
-    const originalIndex = this.state.books.indexOf(book)
+    const originalIndex = _.findIndex(this.state.books, { id: book.id })
+    console.log(originalIndex)
     try {
       await BooksAPI.update(book, shelf)
 
